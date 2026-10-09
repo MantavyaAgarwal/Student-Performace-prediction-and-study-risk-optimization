@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>Academic Intelligence Platform</h1>
+    <p>Prediction · Risk Assessment · Intervention · Optimization</p>
+  </div>
+</header>
+<nav class="tabs">
+  <button class="tab active" data-tab="analysis">Student Analysis</button>
+  <button class="tab" data-tab="students">Student Management</button>
+  <button class="tab" data-tab="optimization">Study Plan Optimization</button>
+  <button class="tab" data-tab="faculty">Faculty Analytics</button>
+  <button class="tab" data-tab="models">Model Evaluation</button>
+</nav>
+<main>
+<section id="analysis" class="tab-panel active">
+  <div class="grid two">
+    <article class="card">
+      <h2>Academic assessment</h2><p class="muted">Enter a student's current academic profile. The system uses Fuzzy Logic, Backpropagation, GA and PSO models.</p>
+      <div class="form-grid">
+        <label>Attendance %<input id="attendance" type="number" min="0" max="100" value="72"></label>
+        <label>Internal marks %<input id="internal" type="number" min="0" max="100" value="68"></label>
+        <label>Assignment %<input id="assignment" type="number" min="0" max="100" value="80"></label>
+        <label>Study hours/day<input id="study" type="number" min="0" max="12" step="0.1" value="3"></label>
+        <label>Previous CGPA<input id="cgpa" type="number" min="0" max="10" step="0.1" value="7.4"></label>
+        <label>Backlogs<input id="backlogs" type="number" min="0" max="20" value="0"></label>
+      </div>
+      <button class="primary" id="predictBtn">Run intelligent assessment</button>
+    </article>
+    <article class="card result-card">
+      <div class="score-head"><div><span class="muted">Hybrid performance score</span><div id="score" class="big-score">—</div></div><div id="riskBadge" class="risk-badge">Waiting</div></div>
+      <div class="metric-row"><div><span>Performance</span><b id="label">—</b></div><div><span>Best NN</span><b id="best">—</b></div><div><span>Fuzzy score</span><b id="fuzzy">—</b></div></div>
+      <h3>Risk factors</h3><div id="riskFactors" class="bars"><p class="muted">Run an assessment to see the explanation.</p></div>
+    </article>
+  </div>
+  <div class="grid two lower">
+    <article class="card"><h2>Personalized intervention</h2><div id="intervention"><p class="muted">No intervention generated yet.</p></div></article>
+    <article class="card"><h2>Fuzzy explanation</h2><div id="memberships" class="membership-grid"></div><details><summary>Activated fuzzy rules</summary><div id="rules" class="rules"></div></details></article>
+  </div>
+  <article class="card lower"><h2>What-if analysis</h2><p class="muted">Change controllable factors and compare the estimated model output. These are model estimates, not guaranteed future grades.</p>
+    <div class="scenario-grid"><label>Scenario attendance %<input id="wa" type="number" min="0" max="100" value="80"></label><label>Scenario study hours<input id="ws" type="number" min="0" max="12" value="4"></label><label>Scenario internal %<input id="wi" type="number" min="0" max="100" value="70"></label><button id="whatIfBtn">Compare scenario</button></div>
+    <div id="whatIfResult" class="scenario-result">—</div>
+  </article>
+</section>
+
+<section id="students" class="tab-panel">
+  <div class="grid two"><article class="card"><h2>Add student</h2><div class="form-grid"><label>Student code<input id="scode" placeholder="S101"></label><label>Name<input id="sname" placeholder="Student name"></label><label>Department<input id="sdept" value="CSE (AI & ML)"></label><label>Division<input id="sdiv" value="A"></label><label>Semester<input id="ssem" value="VII"></label><label>Year<input id="syear" value="Final Year"></label></div><button class="primary" id="addStudent">Save student</button><p id="studentMsg" class="muted"></p></article><article class="card"><h2>Saved students</h2><div id="studentList" class="student-list">Loading…</div></article></div>
+</section>
+
+<section id="optimization" class="tab-panel"><article class="card"><h2>GA / PSO personalized study-plan optimization</h2><p class="muted">Provide weak subjects and available additional study time. GA and PSO search for allocations using the trained hybrid predictor as the fitness estimator.</p><div class="form-grid"><label>Attendance %<input id="oa" type="number" value="72"></label><label>Internal %<input id="oi" type="number" value="68"></label><label>Assignment %<input id="oo" type="number" value="80"></label><label>Study hours/day<input id="os" type="number" value="3" step="0.1"></label><label>Previous CGPA<input id="oc" type="number" value="7.4" step="0.1"></label><label>Additional hours to allocate<input id="ot" type="number" value="6" step="0.5"></label></div><div id="subjectInputs" class="subject-grid"></div><button class="secondary" id="addSubject">+ Add subject</button><button class="primary" id="optimizeBtn">Optimize study plan</button><div id="optimizationResult" class="optimization-results"></div></article></section>
+
+<section id="faculty" class="tab-panel"><div class="grid four" id="summaryCards"></div><article class="card"><h2>Class-level monitoring</h2><p class="muted">The faculty view uses only records saved in this local application database.</p><div id="facultyTable" class="student-list">No saved analyses yet.</div></article><article class="card lower"><h2>Student report</h2><div id="facultyReport" class="report-panel">Select a student to view the detailed report.</div></article></section>
+
+<section id="models" class="tab-panel"><article class="card"><h2>Experimental evaluation</h2><div id="metricsTable" class="table-wrap">Loading…</div><div class="grid two lower"><div><h3>GA convergence</h3><div id="gaChart" class="chart"></div></div><div><h3>PSO convergence</h3><div id="psoChart" class="chart"></div></div></div><p id="trainInfo" class="muted"></p><button id="retrainBtn" class="secondary">Retrain models</button></article></section>
+</main>
+<script src="/static/script.js"></script>
+</body>
+</html>
